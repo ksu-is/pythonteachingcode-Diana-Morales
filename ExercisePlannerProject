@@ -1,8 +1,12 @@
 import random
 
+
 # Project Summary: My Exercise Routine Planner is a Python program that helps users create a customized workout plan based on their fitness goals. The program asks questions like the user’s name, height, workout goal, preferred muscle group, and how many days they want to work out. Using these answers, it builds either a strength‑training or cardio routine that matches the user’s choices. The program now creates a simple multi‑day workout schedule with multiple exercises per day, each including sets and reps so the routine feels more like a real workout plan. The exercises rotate across the days to keep the schedule balanced and beginner‑friendly. At the end, the program displays the full plan in a clean, easy‑to‑read format that shows each day and the exercises assigned to it.
 
 # Flow of Program: I want my code to: collect user info, identify goal type, select exercises, generate the routine, and display the final plan.
+
+
+
 
 # //////////////////////////////////////////////////////////////////////////////
 # Code to collect user info:
@@ -50,6 +54,9 @@ def get_user_info():
 
     return user_info
 
+
+
+
 # //////////////////////////////////////////////////////////////////////////////
 # Code to identify goal type:
 # //////////////////////////////////////////////////////////////////////////////
@@ -66,6 +73,14 @@ def identify_goal_type(user_info):
         return "strength"
     else:
         return "cardio"
+
+
+
+
+
+
+
+
 
 # //////////////////////////////////////////////////////////////////////////////
 # Code to select select the exercises:
@@ -167,46 +182,46 @@ def select_exercises(goal_type, user_info):
     else:
         return cardio_list
 
+
+
+
 # //////////////////////////////////////////////////////////////////////////////
 # Code to generate the routine:
 # //////////////////////////////////////////////////////////////////////////////
 
-# UPDATED VERSION — prevents back‑to‑back repeats
+# FINAL VERSION — fully random, no repeats from previous day
 def generate_routine(exercises, user_info):
     # This version gives 3 exercises per day.
 
     days = int(user_info["days"])
     routine = []
 
-    # Shuffle exercises so the order changes each run
-    random.shuffle(exercises)
-
-    # Track last day's exercises to avoid repeats
     previous_day = set()
 
-    for day in range(days):
-        day_plan = []
-        used_today = set()
+    for _ in range(days):
 
-        # Pick 3 exercises for the day
-        for exercise in exercises:
-            if exercise not in previous_day and exercise not in used_today:
-                day_plan.append(exercise)
-                used_today.add(exercise)
+        # Shuffle a fresh copy every day
+        shuffled = exercises.copy()
+        random.shuffle(shuffled)
 
-            if len(day_plan) == 3:
-                break
+        # Remove yesterday's exercises
+        available = [ex for ex in shuffled if ex not in previous_day]
 
-        # If we somehow run out (rare), fill remaining slots
-        while len(day_plan) < 3:
-            choice = random.choice(exercises)
-            if choice not in previous_day and choice not in day_plan:
-                day_plan.append(choice)
+        # If fewer than 3 remain, use the shuffled list anyway
+        if len(available) < 3:
+            available = shuffled
+
+        # Pick 3 random exercises
+        day_plan = random.sample(available, 3)
 
         routine.append(day_plan)
+
         previous_day = set(day_plan)
 
     return routine
+
+
+
 
 # //////////////////////////////////////////////////////////////////////////////
 # Code to display final plan:
@@ -220,6 +235,9 @@ def display_final_plan(routine):
         print(f"\nDay {day_number}:")
         for exercise in day_exercises:
             print(f"• {exercise}")
+
+
+
 
 # Test the full program
 info = get_user_info()
