@@ -25,11 +25,11 @@
 ☑ Fix errors and clean code
 
 ## Finishing Up 
-☐ Rewrite project summary so it aligns with new edits 
-☐ Rewrite project flow so that the sections and overall project route make sense
+☑ Rewrite project summary so it aligns with new edits 
+☑ Rewrite project flow so that the sections and overall project route make sense
 
 ## Ending: 
-☐ Final run to ensure everything works
+☑ Final run to ensure everything works
 ☐ Finish team recording
 ☐ Create Project Presentation Slide 
 ☐ Submit project files
