@@ -2,9 +2,12 @@
 # Flow of Program: I want my code to: collect user info, identify goal type, select exercises, generate the routine, and display the final plan.
 
 
+
+
 # //////////////////////////////////////////////////////////////////////////////
 # Code to collect user info: This section is where the program gets all the basic details it needs before anything else can happen. I want this part to ask the user for things like their name, height, workout goal, muscle group preference, and how many days they want to train. The point of this section is to gather the information that will shape the entire routine. Without this step, the program wouldn’t know what kind of plan to build or what the user actually wants.
 # //////////////////////////////////////////////////////////////////////////////
+
 def get_user_info():
     # This function asks the user questions.
     # We save the answers so we can build the workout plan later.
@@ -65,7 +68,18 @@ def get_user_info():
 # Code to identify goal type: Here, the program looks at the user’s main goal and decides which direction the rest of the code should go. If the user wants strength training, the program will follow the strength path. If they want cardio, it will follow the cardio path. This section is important because it splits the logic early, so the program only uses the steps that match the user’s goal instead of mixing everything together.
 # //////////////////////////////////////////////////////////////////////////////
 
+def identify_goal_type(user_info):
+    # This function looks at the user's goal.
+    # The goal is already saved inside the user_info dictionary.
 
+    goal = user_info["goal_type"]  # this will be "strength" or "cardio"
+
+    # We check the goal and return it.
+    # This helps the next part of the program know which path to follow.
+    if goal == "strength":
+        return "strength"
+    else:
+        return "cardio"
 
 
 
@@ -79,11 +93,33 @@ def get_user_info():
 # Code to select select the exercises: This part chooses the exercises that fit the user’s goal and preferences. For strength, it picks exercises from the muscle group the user selected. For cardio, it chooses from the cardio list. This section makes sure the routine feels personal and not random. It connects the user’s choices to the exercise database and prepares the content that will be used to build the schedule.
 # //////////////////////////////////////////////////////////////////////////////
 
+def select_exercises(goal_type, user_info):
+    # This function picks exercises based on the user's goal.
+    # If the goal is strength, we look at the muscle group.
+    # If the goal is cardio, we use the cardio list.
 
+    # Simple exercise lists for beginners
+    upper_body = ["Push-ups", "Shoulder Press", "Bicep Curls"]
+    lower_body = ["Squats", "Lunges", "Calf Raises"]
+    full_body = ["Burpees", "Mountain Climbers", "Plank"]
+    cardio_list = ["Jogging", "Jump Rope", "Cycling"]
 
+    # If the user picked strength training
+    if goal_type == "strength":
+        muscle = user_info["muscle_group"]  # upper, lower, or full
 
+        # Pick the right list based on the muscle group
+        if muscle == "upper":
+            return upper_body
+        elif muscle == "lower":
+            return lower_body
+        else:
+            # If they typed something else, we use full body
+            return full_body
 
-
+    # If the user picked cardio
+    else:
+        return cardio_list
 
 
 
