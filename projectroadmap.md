@@ -31,6 +31,6 @@
 ## Ending: 
 ☑ Final run to ensure everything works
 ☐ Finish team recording
-☐ Create Project Presentation Slide 
+☑ Create Project Presentation Slide 
 ☐ Submit project files
 
