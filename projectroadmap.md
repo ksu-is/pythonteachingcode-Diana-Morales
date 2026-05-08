@@ -13,10 +13,12 @@
 
 ## Building Code 
 ☑ Plan structure (input → logic → output)
-☐ Create workout lists
-☐ Build user input section (name, goal, workout type, days)
-☐ Build schedule generator (random workouts per day)
-☐ Build output section (print full schedule)
+☐ Create/brainstorm workout lists
+☐ Build user info section (collect name, height, goal, muscle group, days)
+☐ Build goal type section (strength vs cardio logic)
+☐ Build exercise selection section (pick exercises based on goal + preferences)
+☐ Build routine generator section (create multi‑day schedule)
+☐ Build output section (display final plan)
 
 ## Testing Code 
 ☐ Test program with different inputs
