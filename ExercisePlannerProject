@@ -5,7 +5,7 @@
 
 
 # //////////////////////////////////////////////////////////////////////////////
-# Code to collect user info: This section is where the program gets all the basic details it needs before anything else can happen. I want this part to ask the user for things like their name, height, workout goal, muscle group preference, and how many days they want to train. The point of this section is to gather the information that will shape the entire routine. Without this step, the program wouldn’t know what kind of plan to build or what the user actually wants.
+# Code to collect user info:
 # //////////////////////////////////////////////////////////////////////////////
 
 def get_user_info():
@@ -15,41 +15,31 @@ def get_user_info():
     print("Welcome to the Exercise Routine Planner!")
     print("Please answer the questions below.\n")
 
-    # Ask for the user's name
     name = input("What is your name? ")
-
-    # Ask for height in centimeters
     height_cm = input("What is your height in centimeters? ")
 
-    # Ask what type of workout they want
     print("\nWhat is your main workout goal?")
     print("1 - Strength training")
     print("2 - Cardio")
     goal_choice = input("Enter 1 for Strength or 2 for Cardio: ")
 
-    # Turn the number into a word we can use later
     if goal_choice == "1":
         goal_type = "strength"
     elif goal_choice == "2":
         goal_type = "cardio"
     else:
-        # If they type something wrong, we choose strength
         print("Invalid choice. Setting goal to strength.")
         goal_type = "strength"
 
-    # Only ask for muscle group if the user picked strength
     if goal_type == "strength":
         print("\nWhich muscle group do you want to focus on?")
         print("Options: upper, lower, full")
         muscle_group = input("Type your choice: ").strip().lower()
     else:
-        # Cardio users do not need a muscle group
         muscle_group = None
 
-    # Ask how many days they want to work out
     days = input("\nHow many days per week do you want to work out? ")
 
-    # Save all answers in a dictionary
     user_info = {
         "name": name,
         "height_cm": height_cm,
@@ -58,24 +48,17 @@ def get_user_info():
         "days": days
     }
 
-    # Give the dictionary back to the program
     return user_info
 
 
 
 
 # //////////////////////////////////////////////////////////////////////////////
-# Code to identify goal type: Here, the program looks at the user’s main goal and decides which direction the rest of the code should go. If the user wants strength training, the program will follow the strength path. If they want cardio, it will follow the cardio path. This section is important because it splits the logic early, so the program only uses the steps that match the user’s goal instead of mixing everything together.
+# Code to identify goal type:
 # //////////////////////////////////////////////////////////////////////////////
 
 def identify_goal_type(user_info):
-    # This function looks at the user's goal.
-    # The goal is already saved inside the user_info dictionary.
-
-    goal = user_info["goal_type"]  # this will be "strength" or "cardio"
-
-    # We check the goal and return it.
-    # This helps the next part of the program know which path to follow.
+    goal = user_info["goal_type"]
     if goal == "strength":
         return "strength"
     else:
@@ -84,84 +67,91 @@ def identify_goal_type(user_info):
 
 
 
-
-
-
-
-
 # //////////////////////////////////////////////////////////////////////////////
-# Code to select select the exercises: This part chooses the exercises that fit the user’s goal and preferences. For strength, it picks exercises from the muscle group the user selected. For cardio, it chooses from the cardio list. This section makes sure the routine feels personal and not random. It connects the user’s choices to the exercise database and prepares the content that will be used to build the schedule.
+# Code to select the exercises:
 # //////////////////////////////////////////////////////////////////////////////
 
 def select_exercises(goal_type, user_info):
-    # This function picks exercises based on the user's goal.
-    # If the goal is strength, we look at the muscle group.
-    # If the goal is cardio, we use the cardio list.
+    # Updated exercise lists with sets + reps
+    upper_body = [
+        "Push-ups — 3 sets of 10",
+        "Shoulder Press — 3 sets of 12",
+        "Bicep Curls — 3 sets of 15"
+    ]
 
-    # Simple exercise lists for beginners
-    upper_body = ["Push-ups", "Shoulder Press", "Bicep Curls"]
-    lower_body = ["Squats", "Lunges", "Calf Raises"]
-    full_body = ["Burpees", "Mountain Climbers", "Plank"]
-    cardio_list = ["Jogging", "Jump Rope", "Cycling"]
+    lower_body = [
+        "Squats — 3 sets of 12",
+        "Lunges — 3 sets of 10",
+        "Calf Raises — 3 sets of 15"
+    ]
 
-    # If the user picked strength training
+    full_body = [
+        "Burpees — 3 sets of 8",
+        "Mountain Climbers — 3 sets of 20",
+        "Plank — 3 sets of 30 seconds"
+    ]
+
+    cardio_list = [
+        "Jogging — 20 minutes",
+        "Jump Rope — 3 rounds of 1 minute",
+        "Cycling — 15 minutes"
+    ]
+
     if goal_type == "strength":
-        muscle = user_info["muscle_group"]  # upper, lower, or full
+        muscle = user_info["muscle_group"]
 
-        # Pick the right list based on the muscle group
         if muscle == "upper":
             return upper_body
         elif muscle == "lower":
             return lower_body
         else:
-            # If they typed something else, we use full body
             return full_body
 
-    # If the user picked cardio
     else:
         return cardio_list
 
 
 
-# //////////////////////////////////////////////////////////////////////////////
-# Code to select generate the routine: This section takes the exercises and turns them into an actual workout plan. It spreads the exercises across the number of days the user wants to work out. The goal here is to create a clear, organized routine the user can follow day by day. This is where the program turns all the earlier information into something structured and useful.
-# //////////////////////////////////////////////////////////////////////////////
 
+# //////////////////////////////////////////////////////////////////////////////
+# Code to generate the routine:
+# //////////////////////////////////////////////////////////////////////////////
 
 def generate_routine(exercises, user_info):
-    # This function builds the workout routine.
-    # It spreads the exercises across the number of days the user picked.
+    # This version gives 3 exercises per day.
 
-    days = int(user_info["days"])  # how many days they want to work out
+    days = int(user_info["days"])
+    routine = []
 
-    routine = []  # this will store the plan for each day
-
-    # We loop through the number of days
     for day in range(days):
-        # Pick an exercise for this day.
-        # We use the day number to rotate through the list.
-        exercise = exercises[day % len(exercises)]
+        day_plan = []
 
-        # Make a simple message for the day
-        day_plan = f"Day {day + 1}: {exercise}"
+        # Pick 3 exercises for the day
+        for i in range(3):
+            exercise = exercises[(day + i) % len(exercises)]
+            day_plan.append(exercise)
 
-        # Add it to the routine list
         routine.append(day_plan)
 
-    # Give the full routine back to the program
     return routine
 
-def display_final_plan(routine):
-    print("\nYour Custom Workout Plan:")
-    print("--------------------------")
-    for day in routine:
-        print(day)
 
 
 
 # //////////////////////////////////////////////////////////////////////////////
-# Code to display final plan: This is the final step where the program shows the user their completed workout schedule. It lists each day, the workout type, and the exercises for that day. This section is meant to present everything in a clean and easy‑to‑read way so the user can actually use the routine. It’s the final output that brings the whole program together.
-# ////////////////////////////////////////////////////////////////////////////// 
+# Code to display final plan:
+# //////////////////////////////////////////////////////////////////////////////
+
+def display_final_plan(routine):
+    print("\nYOUR CUSTOM WORKOUT PLAN")
+    print("-------------------------")
+
+    for day_number, day_exercises in enumerate(routine, start=1):
+        print(f"\nDay {day_number}:")
+        for exercise in day_exercises:
+            print(f"• {exercise}")
+
+
 
 
 # Test the full program
@@ -170,7 +160,6 @@ goal = identify_goal_type(info)
 exercises = select_exercises(goal, info)
 routine = generate_routine(exercises, info)
 display_final_plan(routine)
-
 
 
 
