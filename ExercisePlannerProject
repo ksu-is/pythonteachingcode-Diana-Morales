@@ -128,7 +128,28 @@ def select_exercises(goal_type, user_info):
 # //////////////////////////////////////////////////////////////////////////////
 
 
+def generate_routine(exercises, user_info):
+    # This function builds the workout routine.
+    # It spreads the exercises across the number of days the user picked.
 
+    days = int(user_info["days"])  # how many days they want to work out
+
+    routine = []  # this will store the plan for each day
+
+    # We loop through the number of days
+    for day in range(days):
+        # Pick an exercise for this day.
+        # We use the day number to rotate through the list.
+        exercise = exercises[day % len(exercises)]
+
+        # Make a simple message for the day
+        day_plan = f"Day {day + 1}: {exercise}"
+
+        # Add it to the routine list
+        routine.append(day_plan)
+
+    # Give the full routine back to the program
+    return routine
 
 
 
@@ -138,7 +159,12 @@ def select_exercises(goal_type, user_info):
 # ////////////////////////////////////////////////////////////////////////////// 
 
 
-
+# Test the full program
+info = get_user_info()
+goal = identify_goal_type(info)
+exercises = select_exercises(goal, info)
+routine = generate_routine(exercises, info)
+display_final_plan(routine)
 
 
 
