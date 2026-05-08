@@ -1,4 +1,5 @@
-# Project Summary: My Exercise Routine Planner is a Python program that helps users create a customized workout plan based on their fitness goals. The program asks users questions like their name, height, workout goals, preferred muscle groups, and how many days they want to work out. Based on their answers, it generates either a strength training or cardio workout routine with exercises matched to their preferences.
+# Project Summary: My Exercise Routine Planner is a Python program that helps users create a customized workout plan based on their fitness goals. The program asks questions like the user’s name, height, workout goal, preferred muscle group, and how many days they want to work out. Using these answers, it builds either a strength‑training or cardio routine that matches the user’s choices. The program now creates a simple multi‑day workout schedule with multiple exercises per day, each including sets and reps so the routine feels more like a real workout plan. The exercises rotate across the days to keep the schedule balanced and beginner‑friendly. At the end, the program displays the full plan in a clean, easy‑to‑read format that shows each day and the exercises assigned to it.
+
 # Flow of Program: I want my code to: collect user info, identify goal type, select exercises, generate the routine, and display the final plan.
 
 
