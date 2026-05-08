@@ -17,12 +17,12 @@
 ☑ Build user info section (collect name, height, goal, muscle group, days)
 ☑ Build goal type section (strength vs cardio logic)
 ☑ Build exercise selection section (pick exercises based on goal + preferences)
-☐ Build routine generator section (create multi‑day schedule)
-☐ Build output section (display final plan)
+☑ Build routine generator section (create multi‑day schedule)
+☑ Build output section (display final plan)
 
 ## Testing Code 
-☐ Test program with different inputs
-☐ Fix errors and clean code
+☑ Test program with different inputs
+☑ Fix errors and clean code
 
 ## Ending: 
 ☐ Final run to ensure everything works
