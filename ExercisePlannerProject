@@ -151,6 +151,11 @@ def generate_routine(exercises, user_info):
     # Give the full routine back to the program
     return routine
 
+def display_final_plan(routine):
+    print("\nYour Custom Workout Plan:")
+    print("--------------------------")
+    for day in routine:
+        print(day)
 
 
 
