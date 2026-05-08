@@ -5,14 +5,58 @@
 # //////////////////////////////////////////////////////////////////////////////
 # Code to collect user info: This section is where the program gets all the basic details it needs before anything else can happen. I want this part to ask the user for things like their name, height, workout goal, muscle group preference, and how many days they want to train. The point of this section is to gather the information that will shape the entire routine. Without this step, the program wouldn’t know what kind of plan to build or what the user actually wants.
 # //////////////////////////////////////////////////////////////////////////////
+def get_user_info():
+    # This function asks the user questions.
+    # We save the answers so we can build the workout plan later.
 
+    print("Welcome to the Exercise Routine Planner!")
+    print("Please answer the questions below.\n")
 
+    # Ask for the user's name
+    name = input("What is your name? ")
 
+    # Ask for height in centimeters
+    height_cm = input("What is your height in centimeters? ")
 
+    # Ask what type of workout they want
+    print("\nWhat is your main workout goal?")
+    print("1 - Strength training")
+    print("2 - Cardio")
+    goal_choice = input("Enter 1 for Strength or 2 for Cardio: ")
 
+    # Turn the number into a word we can use later
+    if goal_choice == "1":
+        goal_type = "strength"
+    elif goal_choice == "2":
+        goal_type = "cardio"
+    else:
+        # If they type something wrong, we choose strength
+        print("Invalid choice. Setting goal to strength.")
+        goal_type = "strength"
 
+    # Only ask for muscle group if the user picked strength
+    if goal_type == "strength":
+        print("\nWhich muscle group do you want to focus on?")
+        print("Options: upper, lower, full")
+        muscle_group = input("Type your choice: ").strip().lower()
+    else:
+        # Cardio users do not need a muscle group
+        muscle_group = None
 
+    # Ask how many days they want to work out
+    days = input("\nHow many days per week do you want to work out? ")
 
+    # Save all answers in a dictionary
+    user_info = {
+        "name": name,
+        "height_cm": height_cm,
+        "goal_type": goal_type,
+        "muscle_group": muscle_group,
+        "days": days
+    }
+
+    # Give the dictionary back to the program
+    return user_info
 
 
 
